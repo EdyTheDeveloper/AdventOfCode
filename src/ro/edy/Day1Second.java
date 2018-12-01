@@ -10,6 +10,11 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 
+ * @author Arnautu Adrian Mihai
+ *
+ */
 public class Day1Second {
 
 	private String input = null;
@@ -28,7 +33,7 @@ public class Day1Second {
 	protected String processInput() {
 		List<Integer> integerInputsList = Arrays.stream(input.split("\n")).map(Integer::parseInt)
 				.collect(Collectors.toList());
-		// Sorted set allows for faster searching in frequency history - duhhh :) 
+		// Sorted set allows for faster searching in frequency history - duhhh :)
 		Set<Integer> frequencyHistoryList = new TreeSet<>();
 
 		int frequency = 0;

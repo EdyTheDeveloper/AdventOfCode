@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 
+ * @author Arnautu Adrian Mihai
+ *
+ */
 public class Day1First {
 
 	private String input = null;
