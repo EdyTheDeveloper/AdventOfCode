@@ -21,10 +21,10 @@ public class Day1First {
 	}
 
 	protected String processInput() {
-		List<Integer> ints = Arrays.stream(input.split("\n")).map(Integer::parseInt).collect(Collectors.toList());
+		List<Integer> integerInputsList = Arrays.stream(input.split("\n")).map(Integer::parseInt).collect(Collectors.toList());
 
 		int frequency = 0;
-		for (Integer integer : ints) {
+		for (Integer integer : integerInputsList) {
 			if (integer == null) {
 				continue;
 			}
