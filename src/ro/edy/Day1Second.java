@@ -25,7 +25,7 @@ public class Day1Second {
 
 	public static void main(String[] args) {
 		long t0 = System.currentTimeMillis();
-		System.out.println(new Day1Second().processInput());
+		System.out.println("Result: " + new Day1Second().processInput());
 		long t1 = System.currentTimeMillis();
 		System.out.println("Processing took " + (t1 - t0) + " millis");
 	}
@@ -66,7 +66,7 @@ public class Day1Second {
 	}
 
 	protected String getInputLocation() {
-		return "inputs/day_1_2.txt";
+		return "inputs/day_1.txt";
 	}
 
 }

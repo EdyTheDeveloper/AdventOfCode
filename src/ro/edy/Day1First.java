@@ -22,7 +22,7 @@ public class Day1First {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new Day1First().processInput());
+		System.out.println("Result: " + new Day1First().processInput());
 	}
 
 	protected String processInput() {
@@ -51,7 +51,7 @@ public class Day1First {
 	}
 
 	protected String getInputLocation() {
-		return "inputs/day_1_1.txt";
+		return "inputs/day_1.txt";
 	}
 
 }
