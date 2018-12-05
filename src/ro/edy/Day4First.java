@@ -148,7 +148,6 @@ public class Day4First {
 
 			inputGuardEntries = new ArrayList<>();
 
-			// just for fun don't use Dates
 			List<String> inputRawRowsList = Arrays.asList(input.split("\n"));
 			for (String rawRow : inputRawRowsList) {
 				GuardEntry parsedGuardEntry = parseGuardEntry(rawRow);
