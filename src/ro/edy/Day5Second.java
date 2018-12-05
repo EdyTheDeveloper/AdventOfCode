@@ -27,13 +27,13 @@ public class Day5Second {
 
 		String polymerType = null;
 		int minimumNumberOfElements = input.length();
-		for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
-			String testInput = input.replace(String.valueOf(alphabet), "");
-			testInput = testInput.replace(String.valueOf(Character.toUpperCase(alphabet)), "");
+		for (char ignoredCharacter = 'a'; ignoredCharacter <= 'z'; ignoredCharacter++) {
+			String testInput = input.replace(String.valueOf(ignoredCharacter), "");
+			testInput = testInput.replace(String.valueOf(Character.toUpperCase(ignoredCharacter)), "");
 			int numberOfElements = getNumberOfElements(testInput);
 			if (numberOfElements < minimumNumberOfElements) {
 				minimumNumberOfElements = numberOfElements;
-				polymerType = String.valueOf(alphabet);
+				polymerType = String.valueOf(ignoredCharacter);
 			}
 		}
 
