@@ -1,7 +1,5 @@
 package ro.edy;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -50,7 +48,7 @@ public class Day7Second {
 
 		int second = -1;
 		try {
-			FileWriter writer = new FileWriter(new File("g:/www.txt"));
+			// FileWriter writer = new FileWriter(new File("g:/www.txt"));
 
 			while (!allStepsFinished()) {
 				second++;
@@ -59,7 +57,7 @@ public class Day7Second {
 						worker.setEndTime(-1);
 						finishStep(worker.getWorkingStep());
 						worker.setIdle(true);
-						writer.write("Second " + second + " Worker " + workers.indexOf(worker) + " finished step " + worker.getWorkingStep() + "\r\n");
+						// writer.write("Second " + second + " Worker " + workers.indexOf(worker) + " finished step " + worker.getWorkingStep() + "\r\n");
 					}
 				}
 
@@ -72,13 +70,13 @@ public class Day7Second {
 						worker.setEndTime(second + availableStepsToComplete.get(0).getTimeToComplete());
 						worker.setIdle(false);
 						availableStepsToComplete.remove(worker.getWorkingStep());
-						writer.write("Second " + second + " Worker " + workers.indexOf(worker) + " acquired step " + worker.getWorkingStep() + "\r\n");
+						// writer.write("Second " + second + " Worker " + workers.indexOf(worker) + " acquired step " + worker.getWorkingStep() + "\r\n");
 					}
 				}
 			}
 
-			writer.flush();
-			writer.close();
+			// writer.flush();
+			// writer.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
