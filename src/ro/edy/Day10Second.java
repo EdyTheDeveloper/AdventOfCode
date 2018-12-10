@@ -1,8 +1,5 @@
 package ro.edy;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,8 +36,8 @@ public class Day10Second {
 
 	private String processInput() throws Exception {
 		int second = 0;
-		Writer writer = new FileWriter(new File("g:/mesaj.txt"));
 		int maximumConnections = 0;
+		List<Point> messageMatrixPointsList = new ArrayList<>();
 		while (matrixHasPointsInIt()) {
 			second++;
 
@@ -50,16 +47,17 @@ public class Day10Second {
 			}
 
 			int calculatedConnections = calculateConnections();
-			if (calculatedConnections == 1776) {
-				// maximumConnections = calculatedConnections;
-				return second + "";
+			if (calculatedConnections > maximumConnections) {
+				maximumConnections = calculatedConnections;
+				messageMatrixPointsList.clear();
+				for (Point point : pointsList) {
+					messageMatrixPointsList.add(new Point(point));
+				}
 			}
 		}
+		printMatrix(messageMatrixPointsList);
 
-		writer.flush();
-		writer.close();
-
-		return maximumConnections + "";
+		return "Result reached at second: " + second;
 	}
 
 	private int calculateConnections() {
@@ -80,20 +78,19 @@ public class Day10Second {
 
 	private boolean matrixHasPointsInIt() {
 		for (Point point : pointsList) {
-			if (point.getX() >= minimumX && point.getX() <= maximumX && point.getY() >= minimumY
-					&& point.getY() <= maximumY) {
+			if (point.getX() >= minimumX && point.getX() <= maximumX && point.getY() >= minimumY && point.getY() <= maximumY) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private void printMatrix(Writer writer) throws Exception {
+	private void printMatrix(List<Point> pointsToPrintList) throws Exception {
 		int tmpMinX = Integer.MAX_VALUE;
 		int tmpMinY = Integer.MAX_VALUE;
 		int tmpMaxX = Integer.MIN_VALUE;
 		int tmpMaxY = Integer.MIN_VALUE;
-		for (Point point : pointsList) {
+		for (Point point : pointsToPrintList) {
 			if (point.getX() < tmpMinX) {
 				tmpMinX = point.getX();
 			}
@@ -110,19 +107,18 @@ public class Day10Second {
 
 		for (int j = tmpMinY; j <= tmpMaxY; j++) {
 			for (int i = tmpMinX; i <= tmpMaxX; i++) {
-				if (pointsList.contains(new Point(i, j, 0, 0))) {
-					writer.write("#");
+				if (pointsToPrintList.contains(new Point(i, j, 0, 0))) {
+					System.out.print("#");
 				} else {
-					writer.write(" ");
+					System.out.print(" ");
 				}
 			}
 
-			writer.write("\r\n");
+			System.out.println();
 		}
-		
-		writer.write("\r\n");
-		writer.write("\r\n");
-		writer.write("\r\n");
+
+		System.out.println();
+		System.out.println();
 	}
 
 	private void initializeInput() {
@@ -135,13 +131,12 @@ public class Day10Second {
 
 			List<String> linesRaw = Arrays.asList(input.split("\n"));
 			for (String line : linesRaw) {
-				int x = Integer.parseInt(
-						line.substring(line.indexOf("position=<") + "position=<".length(), line.indexOf(",")).trim());
+				int x = Integer.parseInt(line.substring(line.indexOf("position=<") + "position=<".length(), line.indexOf(",")).trim());
 				int y = Integer.parseInt(line.substring(line.indexOf(",") + ",".length(), line.indexOf(">")).trim());
-				int velocityX = Integer.parseInt(line.substring(line.indexOf("velocity=<") + "velocity=<".length(),
-						line.indexOf(",", line.indexOf("velocity=<"))).trim());
-				int velocityY = Integer.parseInt(line.substring(line.indexOf(",", line.indexOf("velocity=<")) + 1,
-						line.indexOf(">", line.indexOf("velocity=<"))).trim());
+				int velocityX = Integer
+						.parseInt(line.substring(line.indexOf("velocity=<") + "velocity=<".length(), line.indexOf(",", line.indexOf("velocity=<"))).trim());
+				int velocityY = Integer
+						.parseInt(line.substring(line.indexOf(",", line.indexOf("velocity=<")) + 1, line.indexOf(">", line.indexOf("velocity=<"))).trim());
 
 				Point point = new Point(x, y, velocityX, velocityY);
 				pointsList.add(point);
@@ -180,6 +175,13 @@ public class Day10Second {
 			this.y = y;
 			this.velocityX = velocityX;
 			this.velocityY = velocityY;
+		}
+
+		public Point(Point pointToCopy) {
+			this.x = pointToCopy.getX();
+			this.y = pointToCopy.getY();
+			this.velocityX = pointToCopy.getVelocityX();
+			this.velocityY = pointToCopy.getVelocityY();
 		}
 
 		@Override
@@ -229,10 +231,6 @@ public class Day10Second {
 
 		public int getVelocityY() {
 			return velocityY;
-		}
-
-		private Day10Second getOuterType() {
-			return Day10Second.this;
 		}
 
 	}
